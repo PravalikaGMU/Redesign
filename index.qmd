@@ -4,6 +4,8 @@ title: "Redesign Graph"
 
 #### Original Graph
 
+The Graph which I took is about Poll regarding Feminism
+
 <https://www.washingtonpost.com/graphics/national/feminism-project/poll/>
 
 ![](images/img.png){width="499"}
@@ -95,11 +97,15 @@ The redesigned graph successfully draws attention to the disparities in feminist
 
 In summary, the redesigned graph provides clearer insights and is substantially better than the original design
 
+#### Creating a Dotplot
+
 ```{r}
 library(lattice)
 library(tidyverse)
 library(plotly)
 ```
+
+From the Original Graph Percentages of Men and Women are stored in the Men and Women Vector respectively and then these two vector values are stored in the Matrix form by using cbind.
 
 ```{r}
 Men <- c(10,23,50,5,12)
@@ -118,9 +124,11 @@ rownames(mat) <- Type
 mat
 ```
 
+The below dotplot visualizes opinions about feminism based on gender, with points representing percentages in different categories.
+
 ```{r}
 Feminism = dotplot(mat, groups = FALSE,
-  layout = c(1, 4), aspect = .7,
+  layout = c(1, 2), aspect = .7,
   origin = 0,type = c("p","h"),
   main = "Opinion about feminism?",
   xlab = "Feminism based on Gender",
@@ -133,6 +141,8 @@ Feminism = dotplot(mat, groups = FALSE,
 )
 Feminism
 ```
+
+#### Creating a Bar chart
 
 ```{r}
 data <- data.frame(
@@ -175,7 +185,7 @@ ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +
   labs(x="Gender",
        y="Count",
        title="Gender based Feminism",
-       fill="Color") + hw
+       fill="Types") + hw
 ```
 
 ```{r}
@@ -202,5 +212,5 @@ ggplot(df, aes(x = Category)) +
   scale_fill_manual(values = c("Men" = "blue", "Women" = "yellow")) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-    guides(fill = guide_legend(title = NULL))
+    guides(fill = guide_legend(title = 'Gender'))
 ```
