@@ -1,6 +1,0 @@
-"0","ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +"
-"0","  geom_bar(stat = ""identity"", position = ""dodge"") +"
-"0","  labs(x=""Gender"","
-"0","       y=""Count"","
-"0","       title=""Gender based Feminism"","
-"0","       fill=""Types"") + hw"

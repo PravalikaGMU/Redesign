@@ -1,0 +1,2 @@
+"0",""
+"0","plot_ly(Feminismdata, x = ~Gender, y = ~Count, color =  ~Opinion, type = ""bar"")"

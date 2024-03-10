@@ -3,7 +3,7 @@
     "path": "~/MS/STAT-515/MidProject/Redesign/index.qmd",
     "project_path": "index.qmd",
     "type": "quarto_markdown",
-    "hash": "2212488060",
+    "hash": "3459224383",
     "contents": "",
     "dirty": false,
     "created": 1709827119234.0,
@@ -16,16 +16,16 @@
         "Source": "Source",
         "docOutlineVisible": "1",
         "rmdVisualCollapsedChunks": "",
-        "rmdVisualModeLocation": "6839:6512.7998046875",
-        "cursorPosition": "194,0",
-        "scrollLine": "0"
+        "rmdVisualModeLocation": "8035:7876",
+        "cursorPosition": "218,0",
+        "scrollLine": "83"
     },
     "folds": "",
-    "lastKnownWriteTime": 1709960130,
+    "lastKnownWriteTime": 1710091252,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1709960130966,
+    "last_content_update": 1710091252291,
     "read_only": false,
     "read_only_alternatives": []
 }
