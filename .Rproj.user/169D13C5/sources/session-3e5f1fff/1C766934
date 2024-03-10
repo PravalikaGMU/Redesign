@@ -3,7 +3,7 @@
     "path": "~/MS/STAT-515/MidProject/Redesign/_quarto.yml",
     "project_path": "_quarto.yml",
     "type": "yaml",
-    "hash": "796601978",
+    "hash": "459084699",
     "contents": "",
     "dirty": false,
     "created": 1709827119800.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "9,18",
+        "cursorPosition": "11,16",
         "scrollLine": "0"
     },
     "folds": "",
-    "lastKnownWriteTime": 1710091210,
+    "lastKnownWriteTime": 1710092186,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1710091210599,
+    "last_content_update": 1710092186594,
     "read_only": false,
     "read_only_alternatives": []
 }

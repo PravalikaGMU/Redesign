@@ -99,7 +99,7 @@ The redesigned graph successfully draws attention to the disparities in feminist
 
 In summary, the redesigned graph provides clearer insights and is substantially better than the original design.
 
-#### Redesign
+### Redesign
 
 Redesigning the Original Graph
 
@@ -192,6 +192,8 @@ print(data)
 source("C:\\Users\\chpra\\OneDrive\\Documents\\MS\\STAT-515\\MidProject\\hw.R")
 ```
 
+Below Barchart displays the Opinion about Feminism based on Gender
+
 ```{r}
 data$Opinion <- row.names(data)
 library(tidyr)  
@@ -203,6 +205,8 @@ ggplot(Feminismdata, aes(x = Opinion, y = Count, fill = Gender)) +
       title = "Opinion about feminism based on Gender") +hw 
 ```
 
+Below Graph is the Grouped bar charts representing the opinion based on Gender.
+
 ```{r}
 ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +
   geom_bar(stat = "identity", position = "dodge") +  
@@ -210,6 +214,8 @@ ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +
        title="Gender based Feminism", 
        fill="Types") + hw
 ```
+
+In the below barchart when we hover on each bar we can see the details of each bar.
 
 ```{r}
 
