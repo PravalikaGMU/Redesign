@@ -2,7 +2,7 @@
 title: "Redesign Graph"
 ---
 
-#### Original Graph
+### Original Graph
 
 The Graph which I took is about a Poll regarding Feminism
 
@@ -12,7 +12,7 @@ The Graph which I took is about a Poll regarding Feminism
 
 **Source:** *This Washington Post-Kaiser Family Foundation poll was conducted by telephone May 21 – June 17, 2015, among a random national sample of 1,610 adults age 18 and over, including 1,122 women and 488 men. The results from the full survey have a margin of sampling error of plus or minus three percentage points; for women the margin of sampling error is plus or minus 3.5 percentage points and for men it is plus or minus 5.5 percentage points. Sampling, data collection and tabulation by Social Science Research Solutions (SSRS) of Media, Pa. NOTE: Percentages may not add up to 100% due to rounding.*
 
-**Description**
+#### **Description**
 
 -   The graph uses horizontal bars to compare the percentages of men and women in five feminist belief categories: “Strong feminist,” “Feminist,” “Not a feminist,” “Anti-feminist,” and “No opinion.”
 
@@ -22,7 +22,7 @@ The Graph which I took is about a Poll regarding Feminism
 
 -   Percentages for each category are labeled on the bars.
 
-**Drawbacks of Original Graph**
+#### **Drawbacks of Original Graph**
 
 **Color Contrast:** There is not enough color difference between men's blue and women's yellow. Viewers could find it difficult to distinguish between the two groups fast.\
 Recommendation: To improve clarity, use more distinct colors\
@@ -34,7 +34,7 @@ To make comparisons easier, consider arranging the bars in decreasing order
 
 **Gender Symbols:** Using male and female icons as gender symbols creates extra complexity and doesn't help with comprehending the data. It would be simpler to remove the gender symbols from the graph.
 
-**Suggested Enhancements:**
+#### **Suggested Enhancements:**
 
 **Color Enhancement:**\
 Improved differentiation can be achieved by using distinct colors for each type.\
@@ -48,7 +48,7 @@ For simpler comparison, combine related categories (feminist beliefs, for exampl
 To make the graph less cluttered, remove the icons for men and women.\
 Instead, make use of legible labels.
 
-**Special Efforts:**
+#### **Special Efforts:**
 
 -   I took into consideration best practices for data visualization, such as color selection, labeling, and logical grouping.
 
@@ -56,13 +56,13 @@ Instead, make use of legible labels.
 
 -   An attempt was made to improve the graph's efficiency and simplify it.
 
-**Redesigned Graph:**
+#### **Redesigned Graph:**
 
 **Original Graph:** The original graph used horizontal bars to show men's and women's self-identified feminist beliefs. But its lack of grouping, tiny labeling, and low color contrast were its problems.
 
 **Redesigned Graph:** For each belief category, I made a grouped bar chart with a different color. Comparing men and women side by side is made easy. The graph is more visually appealing and the labels are apparent.
 
-**Patterns in the Redesigned Graph:**
+#### **Patterns in the Redesigned Graph:**
 
 **Strong Feminist:**
 
@@ -84,12 +84,11 @@ Very few respondents (both men and women) identify as anti-feminists (5% men, 2%
 
 Men (12%) have slightly more no-opinion responses than women (7%).
 
-**Concluding Remarks:**
+#### **Concluding Remarks:**
 
 The redesigned graph successfully draws attention to the disparities in feminist beliefs between genders.
 
-\
-**Further actions:**
+####  **Further actions:**
 
 -   Gather more information to confirm these trends in a range of demographics.
 

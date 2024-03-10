@@ -4,22 +4,20 @@ title: "Redesign Code"
 
 #### Code of the Redesign
 
-```         
+```{r,results='hide',warning=FALSE,error=FALSE,message=FALSE}
 library(lattice)
 library(tidyverse)
 library(plotly)
 ```
 
-```         
-
-
+```{r,results='hide'}
 Men <- c(10,23,50,5,12) 
 Women <- c(17,43,30,2,7)
 mat <- cbind(Men, Women) 
 mat
 ```
 
-```         
+```{r,results='hide'}
 Type <- c("Strong feminist", "Feminist","Not a feminist","Anti-feminist", "No opinion") 
 Gender <- c("Men","Women") 
 colnames(mat) <- Gender 
@@ -27,9 +25,7 @@ rownames(mat) <- Type
 mat
 ```
 
-```         
-
-
+```{r,results='hide',fig.show='hide'}
 Feminism = dotplot(mat, groups = FALSE, 
                    layout = c(1, 2), aspect = .7, 
         origin = 0,type = c("p","h"),       
@@ -44,21 +40,21 @@ Feminism = dotplot(mat, groups = FALSE,
 Feminism 
 ```
 
-```         
-Means <- rowMeans(mat) Means
+```{r,results='hide'}
+Means <- rowMeans(mat) 
+Means
 ```
 
-```         
-
+```{r,results='hide'}
 
 (OrderType <- order(-Means))
 ```
 
-```         
+```{r,results='hide'}
 cbind(mat,Means)[OrderType,]
 ```
 
-```         
+```{r,results='hide',fig.show='hide'}
 
 dotplot(mat[OrderType,],groups = FALSE,
         layout = c(2,2),aspect = .9,  
@@ -74,26 +70,22 @@ dotplot(mat[OrderType,],groups = FALSE,
 
 #### Creating a Bar chart
 
-```         
+```{r,results='hide',fig.show='hide'}
 data <- data.frame( Men = c(10, 23, 50, 5, 12),
 Women = c(17, 43, 30, 2, 7),
 row.names = c("Strong feminist", "Feminist", "Not a feminist", "Anti-feminist", "No opinion") )
 print(data)
 ```
 
-```         
-
-
+```{r,results='hide'}
 summary(data)
 ```
 
-```         
-source("C:\Users\chpra\OneDrive\Documents\MS\STAT-515\MidProject\hw.R")
+```{r}
+source("C:\\Users\\chpra\\OneDrive\\Documents\\MS\\STAT-515\\MidProject\\hw.R")
 ```
 
-```         
-
-
+```{r,results='hide',fig.show='hide'}
 data$Opinion <- row.names(data) 
 library(tidyr)   
 Feminismdata <- gather(data, Gender, Count, -Opinion) 
@@ -104,7 +96,7 @@ ggplot(Feminismdata, aes(x = Opinion, y = Count, fill = Gender)) +
         title = "Opinion about feminism based on Gender") +hw
 ```
 
-```         
+```{r,results='hide',fig.show='hide'}
 ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +
 geom_bar(stat = "identity", position = "dodge") +
 labs(x="Gender",y="Count",
@@ -112,13 +104,11 @@ title="Gender based Feminism",
 fill="Types") + hw
 ```
 
-```         
-
-
+```{r,results='hide',fig.show='hide'}
 plot_ly(Feminismdata, x = ~Gender, y = ~Count, color =  ~Opinion, type = "bar")
 ```
 
-```         
+```{r,results='hide',fig.show='hide'}
 categories <- c("Strong feminist", "Feminist", "Not a feminist", "Anti-feminist",
 "No opinion")
 men_percentages <- c(10, 23, 50, 5, 12) 
@@ -134,5 +124,6 @@ labs(x = "Feminist Beliefs", y = "Percentage",
 title = "Self-Identified Feminist Beliefs by Gender") +
 scale_fill_manual(values = c("Men" = "blue", "Women" = "yellow")) +
 theme_minimal() +theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-guides(fill = guide_legend(title = 'Gender')) 
+guides(fill = guide_legend(title = 'Gender'))
+
 ```

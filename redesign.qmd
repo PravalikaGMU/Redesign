@@ -1,5 +1,7 @@
 ---
 title: "Redesign"
+execute: 
+  echo: false
 ---
 
 ## Redesign
@@ -8,9 +10,7 @@ Redesigning the Original Graph
 
 #### Creating a Dotplot
 
-loading the libraries
-
-```{r}
+```{r,warning=FALSE,error=FALSE,message=FALSE}
 library(lattice)
 library(tidyverse) 
 library(plotly)
@@ -51,6 +51,8 @@ Feminism = dotplot(mat, groups = FALSE,
 Feminism
 ```
 
+Taking Mean of the provided data and displayed in the descending order based on type.
+
 ```{r}
 Means <- rowMeans(mat) 
 Means
@@ -63,6 +65,8 @@ Means
 ```{r}
 cbind(mat,Means)[OrderType,]
 ```
+
+Created a plot in the ascending order of Opinion.
 
 ```{r}
 dotplot(mat[OrderType,],groups = FALSE,
@@ -78,6 +82,8 @@ panel = function(...){     panel.fill(rgb(.9,.9,.9))
 ```
 
 #### Creating a Bar chart
+
+created a dataframe
 
 ```{r}
 data <- data.frame(   Men = c(10, 23, 50, 5, 12),

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -133,95 +167,113 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="code-of-the-redesign" class="level4">
 <h4 class="anchored" data-anchor-id="code-of-the-redesign">Code of the Redesign</h4>
-<pre><code>library(lattice)
-library(tidyverse)
-library(plotly)</code></pre>
-<pre><code>
-
-Men &lt;- c(10,23,50,5,12) 
-Women &lt;- c(17,43,30,2,7)
-mat &lt;- cbind(Men, Women) 
-mat</code></pre>
-<pre><code>Type &lt;- c("Strong feminist", "Feminist","Not a feminist","Anti-feminist", "No opinion") 
-Gender &lt;- c("Men","Women") 
-colnames(mat) &lt;- Gender 
-rownames(mat) &lt;- Type 
-mat</code></pre>
-<pre><code>
-
-Feminism = dotplot(mat, groups = FALSE, 
-                   layout = c(1, 2), aspect = .7, 
-        origin = 0,type = c("p","h"),       
-        main = "Opinion about feminism?", 
-        xlab = "Feminism based on Gender",
-        scales = list(x = list(tck = 0, alternating = FALSE)), 
-        panel = function(...)          
-        {     panel.fill(rgb(.9,.9,.9)) 
-          panel.grid(h = 0,v = -1,col = "white",lwd = 2)    
-          panel.dotplot(col = rgb(0,.5,1),cex = 1.1,...) 
-        } ) 
-Feminism </code></pre>
-<pre><code>Means &lt;- rowMeans(mat) Means</code></pre>
-<pre><code>
-
-(OrderType &lt;- order(-Means))</code></pre>
-<pre><code>cbind(mat,Means)[OrderType,]</code></pre>
-<pre><code>
-dotplot(mat[OrderType,],groups = FALSE,
-        layout = c(2,2),aspect = .9,  
-        type = c("p","l"),   
-        main = "Gender based opinion on Feminism", 
-        xlab = "Percentage of Opinion",  
-        scales = list(x = list(tck = 0, alternating =  FALSE)),
-        panel = function(...)
-        {     panel.fill(rgb(.9,.9,.9))   
-          panel.grid(h = 0,v = -1,col = "white",lwd = 2) 
-          panel.dotplot(col = rgb(0,.6,1),cex = 1.1,...)   } )</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(plotly)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Men <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>,<span class="dv">23</span>,<span class="dv">50</span>,<span class="dv">5</span>,<span class="dv">12</span>) </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>Women <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>,<span class="dv">43</span>,<span class="dv">30</span>,<span class="dv">2</span>,<span class="dv">7</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(Men, Women) </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Type <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Strong feminist"</span>, <span class="st">"Feminist"</span>,<span class="st">"Not a feminist"</span>,<span class="st">"Anti-feminist"</span>, <span class="st">"No opinion"</span>) </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>Gender <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Men"</span>,<span class="st">"Women"</span>) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(mat) <span class="ot">&lt;-</span> Gender </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(mat) <span class="ot">&lt;-</span> Type </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Feminism <span class="ot">=</span> <span class="fu">dotplot</span>(mat, <span class="at">groups =</span> <span class="cn">FALSE</span>, </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), <span class="at">aspect =</span> .<span class="dv">7</span>, </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">origin =</span> <span class="dv">0</span>,<span class="at">type =</span> <span class="fu">c</span>(<span class="st">"p"</span>,<span class="st">"h"</span>),       </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Opinion about feminism?"</span>, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Feminism based on Gender"</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">tck =</span> <span class="dv">0</span>, <span class="at">alternating =</span> <span class="cn">FALSE</span>)), </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel =</span> <span class="cf">function</span>(...)          </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        {     <span class="fu">panel.fill</span>(<span class="fu">rgb</span>(.<span class="dv">9</span>,.<span class="dv">9</span>,.<span class="dv">9</span>)) </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>          <span class="fu">panel.grid</span>(<span class="at">h =</span> <span class="dv">0</span>,<span class="at">v =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">col =</span> <span class="st">"white"</span>,<span class="at">lwd =</span> <span class="dv">2</span>)    </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">panel.dotplot</span>(<span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,.<span class="dv">5</span>,<span class="dv">1</span>),<span class="at">cex =</span> <span class="fl">1.1</span>,...) </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        } ) </span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Feminism </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Means <span class="ot">&lt;-</span> <span class="fu">rowMeans</span>(mat) </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>Means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>(OrderType <span class="ot">&lt;-</span> <span class="fu">order</span>(<span class="sc">-</span>Means))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cbind</span>(mat,Means)[OrderType,]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dotplot</span>(mat[OrderType,],<span class="at">groups =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">layout =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">2</span>),<span class="at">aspect =</span> .<span class="dv">9</span>,  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>        <span class="at">type =</span> <span class="fu">c</span>(<span class="st">"p"</span>,<span class="st">"l"</span>),   </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Gender based opinion on Feminism"</span>, </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Percentage of Opinion"</span>,  </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">scales =</span> <span class="fu">list</span>(<span class="at">x =</span> <span class="fu">list</span>(<span class="at">tck =</span> <span class="dv">0</span>, <span class="at">alternating =</span>  <span class="cn">FALSE</span>)),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">panel =</span> <span class="cf">function</span>(...)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        {     <span class="fu">panel.fill</span>(<span class="fu">rgb</span>(.<span class="dv">9</span>,.<span class="dv">9</span>,.<span class="dv">9</span>))   </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>          <span class="fu">panel.grid</span>(<span class="at">h =</span> <span class="dv">0</span>,<span class="at">v =</span> <span class="sc">-</span><span class="dv">1</span>,<span class="at">col =</span> <span class="st">"white"</span>,<span class="at">lwd =</span> <span class="dv">2</span>) </span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>          <span class="fu">panel.dotplot</span>(<span class="at">col =</span> <span class="fu">rgb</span>(<span class="dv">0</span>,.<span class="dv">6</span>,<span class="dv">1</span>),<span class="at">cex =</span> <span class="fl">1.1</span>,...)   } )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="creating-a-bar-chart" class="level4">
 <h4 class="anchored" data-anchor-id="creating-a-bar-chart">Creating a Bar chart</h4>
-<pre><code>data &lt;- data.frame( Men = c(10, 23, 50, 5, 12),
-Women = c(17, 43, 30, 2, 7),
-row.names = c("Strong feminist", "Feminist", "Not a feminist", "Anti-feminist", "No opinion") )
-print(data)</code></pre>
-<pre><code>
-
-summary(data)</code></pre>
-<pre><code>source("C:\Users\chpra\OneDrive\Documents\MS\STAT-515\MidProject\hw.R")</code></pre>
-<pre><code>
-
-data$Opinion &lt;- row.names(data) 
-library(tidyr)   
-Feminismdata &lt;- gather(data, Gender, Count, -Opinion) 
-library(ggplot2)  
-ggplot(Feminismdata, aes(x = Opinion, y = Count, fill = Gender)) + 
-  geom_bar(stat = "identity", position = "dodge") + 
-  labs( x = "Type",  y = "Count",  
-        title = "Opinion about feminism based on Gender") +hw</code></pre>
-<pre><code>ggplot(Feminismdata, aes(x = Gender, y = Count, fill = Opinion)) +
-geom_bar(stat = "identity", position = "dodge") +
-labs(x="Gender",y="Count",
-title="Gender based Feminism", 
-fill="Types") + hw</code></pre>
-<pre><code>
-
-plot_ly(Feminismdata, x = ~Gender, y = ~Count, color =  ~Opinion, type = "bar")</code></pre>
-<pre><code>categories &lt;- c("Strong feminist", "Feminist", "Not a feminist", "Anti-feminist",
-"No opinion")
-men_percentages &lt;- c(10, 23, 50, 5, 12) 
-women_percentages &lt;- c(17, 43, 30, 2, 7) 
-df &lt;- data.frame(Category = categories,
-Men = men_percentages, Women = women_percentages)
-ggplot(df, aes(x = Category)) +
-geom_bar(aes(y = Men, fill = "Men"),
-stat = "identity", position = "dodge") + 
-geom_bar(aes(y = Women, fill = "Women"),
-stat = "identity", position = "dodge") + 
-labs(x = "Feminist Beliefs", y = "Percentage",
-title = "Self-Identified Feminist Beliefs by Gender") +
-scale_fill_manual(values = c("Men" = "blue", "Women" = "yellow")) +
-theme_minimal() +theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-guides(fill = guide_legend(title = 'Gender')) </code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Men =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">50</span>, <span class="dv">5</span>, <span class="dv">12</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="at">Women =</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">43</span>, <span class="dv">30</span>, <span class="dv">2</span>, <span class="dv">7</span>),</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">row.names =</span> <span class="fu">c</span>(<span class="st">"Strong feminist"</span>, <span class="st">"Feminist"</span>, <span class="st">"Not a feminist"</span>, <span class="st">"Anti-feminist"</span>, <span class="st">"No opinion"</span>) )</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"C:</span><span class="sc">\\</span><span class="st">Users</span><span class="sc">\\</span><span class="st">chpra</span><span class="sc">\\</span><span class="st">OneDrive</span><span class="sc">\\</span><span class="st">Documents</span><span class="sc">\\</span><span class="st">MS</span><span class="sc">\\</span><span class="st">STAT-515</span><span class="sc">\\</span><span class="st">MidProject</span><span class="sc">\\</span><span class="st">hw.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>Opinion <span class="ot">&lt;-</span> <span class="fu">row.names</span>(data) </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)   </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>Feminismdata <span class="ot">&lt;-</span> <span class="fu">gather</span>(data, Gender, Count, <span class="sc">-</span>Opinion) </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)  </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Feminismdata, <span class="fu">aes</span>(<span class="at">x =</span> Opinion, <span class="at">y =</span> Count, <span class="at">fill =</span> Gender)) <span class="sc">+</span> </span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>( <span class="at">x =</span> <span class="st">"Type"</span>,  <span class="at">y =</span> <span class="st">"Count"</span>,  </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">title =</span> <span class="st">"Opinion about feminism based on Gender"</span>) <span class="sc">+</span>hw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(Feminismdata, <span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> Count, <span class="at">fill =</span> Opinion)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x=</span><span class="st">"Gender"</span>,<span class="at">y=</span><span class="st">"Count"</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="at">title=</span><span class="st">"Gender based Feminism"</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="at">fill=</span><span class="st">"Types"</span>) <span class="sc">+</span> hw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_ly</span>(Feminismdata, <span class="at">x =</span> <span class="sc">~</span>Gender, <span class="at">y =</span> <span class="sc">~</span>Count, <span class="at">color =</span>  <span class="sc">~</span>Opinion, <span class="at">type =</span> <span class="st">"bar"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>categories <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Strong feminist"</span>, <span class="st">"Feminist"</span>, <span class="st">"Not a feminist"</span>, <span class="st">"Anti-feminist"</span>,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="st">"No opinion"</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>men_percentages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">23</span>, <span class="dv">50</span>, <span class="dv">5</span>, <span class="dv">12</span>) </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>women_percentages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">43</span>, <span class="dv">30</span>, <span class="dv">2</span>, <span class="dv">7</span>) </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Category =</span> categories,</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="at">Men =</span> men_percentages, <span class="at">Women =</span> women_percentages)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(<span class="at">x =</span> Category)) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> Men, <span class="at">fill =</span> <span class="st">"Men"</span>),</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">y =</span> Women, <span class="at">fill =</span> <span class="st">"Women"</span>),</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span> </span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Feminist Beliefs"</span>, <span class="at">y =</span> <span class="st">"Percentage"</span>,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Self-Identified Feminist Beliefs by Gender"</span>) <span class="sc">+</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Men"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Women"</span> <span class="ot">=</span> <span class="st">"yellow"</span>)) <span class="sc">+</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_minimal</span>() <span class="sc">+</span><span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">title =</span> <span class="st">'Gender'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>
